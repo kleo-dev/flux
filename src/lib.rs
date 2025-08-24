@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub enum FluxValue {
     Int(i64),
     Float(f64),
@@ -26,4 +27,3 @@ pub mod runtime;
 pub mod prelude {
     pub use crate::{FluxModule, Serialize, Deserialize};
 }
-

@@ -4,5 +4,5 @@ fn main() {
     let bro = PythonModule("bro.py".to_string());
     bro.init();
 
-    bro.call("hello", vec![]);
+    println!("{:?}", bro.call("hello", vec![]));
 }
