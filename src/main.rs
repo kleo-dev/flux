@@ -1,6 +1,8 @@
-use std::path::Path;
-use flux_rt::run_py;
+use flux_rt::{runtime::python::PythonModule, prelude::*};
 
 fn main() {
-    run_py(Path::new("bro.py"));
+    let bro = PythonModule("bro.py".to_string());
+    bro.init();
+
+    bro.call("hello", vec![]);
 }

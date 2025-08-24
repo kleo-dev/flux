@@ -1,4 +1,3 @@
-def hello():
-    print("Hello, bro!")
-
-hello()
+def hello(name: str) -> str:
+    print("Hello, bro! " + name)
+    return "Idk, return value i guess"
