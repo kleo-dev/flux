@@ -9,5 +9,5 @@ fn main() {
     let lib_dir = String::from_utf8(lib_dir).unwrap();
     println!("cargo:rustc-link-search=native={}", lib_dir.trim());
 
-    println!("cargo:rustc-link-lib=python3.11");
+    println!("cargo:rustc-link-lib=python3.13");
 }
