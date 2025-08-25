@@ -7,5 +7,5 @@ fn main() {
     let gil = python::get_gil();
     let m = python::import("bro.py", &gil);
 
-    println!("{:?}", m.call("hello", vec![&"leo"]));
+    println!("{:?}", m.call("hello", vec![&"leo"]).extract::<f64>());
 }
