@@ -1,8 +1,11 @@
-use flux_rt::{runtime::python::PythonModule, prelude::*};
+use flux_rt::{
+    runtime::python::{self},
+    FluxModule,
+};
 
 fn main() {
-    let bro = PythonModule("bro.py".to_string());
-    bro.init();
+    let gil = python::get_gil();
+    let m = python::import("bro.py", &gil);
 
-    println!("{:?}", bro.call("hello", vec![]));
+    println!("{:?}", m.call("hello", vec![&"leo"]));
 }
