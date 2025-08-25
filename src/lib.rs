@@ -10,29 +10,25 @@ pub enum FluxValue {
     Map(BTreeMap<FluxValue, FluxValue>),
 }
 
-pub trait Serialize {
-    fn serialize(&self) -> FluxValue;
-}
-
-pub trait Deserialize {
-    fn deserialize(v: FluxValue) -> Self;
+pub trait ToFlux {
+    fn to_flux(&self) -> FluxValue;
 }
 
 pub trait FluxModule {
     fn init(&self);
     fn end(&self);
-    fn call(&self, func: &str, args: Vec<&dyn Serialize>) -> FluxValue;
+    fn call(&self, func: &str, args: Vec<&dyn ToFlux>) -> FluxValue;
 }
 
 pub mod runtime;
 pub mod values;
 
 pub mod prelude {
-    pub use crate::{Deserialize, FluxModule, Serialize};
+    pub use crate::{FluxModule, ToFlux};
 }
 
 impl FluxValue {
-    pub fn extract<T: Deserialize>(self) -> T {
-        T::deserialize(self)
+    pub fn extract<T: From<FluxValue>>(self) -> T {
+        T::from(self)
     }
 }

@@ -53,13 +53,13 @@ impl FluxModule for PythonModule<'_> {
         self.python.run(&code, None, None).unwrap();
     }
 
-    fn call(&self, func: &str, args: Vec<&dyn crate::Serialize>) -> crate::FluxValue {
+    fn call(&self, func: &str, args: Vec<&dyn crate::ToFlux>) -> crate::FluxValue {
         let module = self.python.import("__main__").unwrap();
         let func = module.get(self.python, func).unwrap();
 
         let py_args: Vec<PyObject> = args
             .iter()
-            .map(|a| flux_to_object(self.python, &a.serialize()))
+            .map(|a| flux_to_object(self.python, &a.to_flux()))
             .collect();
 
         let args_tuple = PyTuple::new(self.python, &py_args);
