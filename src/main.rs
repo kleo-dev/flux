@@ -8,4 +8,6 @@ fn main() {
     let m = python::import("bro.py", &gil);
 
     println!("{:?}", m.call("hello", vec![&"leo"]).extract::<String>());
+
+    println!("{:?}", m.call("add", vec![&10, &20]).extract::<i32>());
 }
